@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Shabbat candles</string>
+    <string name="title">Light your shabbat candles at</string>
+    <string name="number_of_comments">%1$s comments</string>
+</resources>
