@@ -7,4 +7,6 @@ interface HebCalInterface{
 
     @GET("/shabbat/?cfg=json&geonameid=3435910&m=0&leyning=off")
     suspend fun shabbatTime() : HebCalResponse
+
+    //https://www.geonames.org/export/web-services.html
 }
