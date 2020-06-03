@@ -1,5 +1,12 @@
 package com.nochita.shabbatCandles.extentions
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import com.nochita.shabbatCandles.model.ShabbatCandlesData
+import com.nochita.shabbatCandles.receiver.NotificationReceiver
+import com.nochita.shabbatCandles.ui.MainFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,4 +38,18 @@ fun String.parseToDayOfTheMonth(): String? {
 
 fun String.parseToHoursAndSeconds(): String? {
     return parseToDate()?.formatToDate(format = FORMAT_HOURS_AND_MINUTES)
+}
+
+fun AlarmManager.createNotification(context : Context, data : ShabbatCandlesData, millisBefore : Long = 0) {
+    val broadcastIntent = Intent(context, NotificationReceiver::class.java)
+    broadcastIntent.putExtra(MainFragment.DATE_EXTRA, data.date)
+    broadcastIntent.putExtra(MainFragment.PARASHAT_EXTRA, data.parashat)
+
+    val notificationIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent,  PendingIntent.FLAG_UPDATE_CURRENT)
+
+    set(
+        AlarmManager.RTC_WAKEUP,
+        data.getDateInMillis()!! - millisBefore,
+        notificationIntent
+    )
 }

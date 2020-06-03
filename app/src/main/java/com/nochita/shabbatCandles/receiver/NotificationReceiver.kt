@@ -9,13 +9,14 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.nochita.shabbatCandles.R
 import com.nochita.shabbatCandles.extentions.parseToHoursAndSeconds
 import com.nochita.shabbatCandles.ui.MainFragment
 
 
-class AlarmReceiver : BroadcastReceiver() {
+class NotificationReceiver : BroadcastReceiver() {
 
-    private val TAG = AlarmReceiver::class.java.simpleName
+    private val TAG = NotificationReceiver::class.java.simpleName
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called with: context = [$context], intent = [$intent]")
@@ -32,7 +33,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channelId = "shabbat_candle_light"
-                val name: CharSequence = "Shabbat Candle Lights"
+                val name: CharSequence = context.getString(R.string.light_candle_notificacion)
                 val description = "Channel to shabbat candle lights timming"
 
                 val importance = NotificationManager.IMPORTANCE_HIGH
@@ -51,9 +52,9 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             builder.apply {
-                setSmallIcon(android.R.drawable.ic_media_play)
-                setContentTitle("Shabbat Candle light")
-                setContentText("${parashat} at ${dateString.parseToHoursAndSeconds()}")
+                setSmallIcon(R.drawable.ic_candle)
+                setContentTitle("${parashat} at ${dateString.parseToHoursAndSeconds()}")
+                setContentText(context.getString(R.string.light_candle_notificacion))
             }
 
             notificationManager?.notify(notificationId, builder.build())

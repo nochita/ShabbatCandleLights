@@ -2,5 +2,6 @@
     <string name="app_name">Shabbat candles</string>
     <string name="title">Encendido de velas de shabat</string>
     <string name="show_notifications">Mostrar notificaciones</string>
-    <string name="friday_at">"viernes %1s a las "</string>
+    <string name="friday_at">"Viernes %1s a las "</string>
+    <string name="light_candle_notificacion">"Encendido de velas de shabat"</string>
 </resources>

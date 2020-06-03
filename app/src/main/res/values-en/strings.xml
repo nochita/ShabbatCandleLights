@@ -3,4 +3,5 @@
     <string name="title">Light your shabbat candles at</string>
     <string name="show_notifications">Show notifications</string>
     <string name="friday_at">"Friday %1s at "</string>
+    <string name="light_candle_notificacion">"Light Shabbat candle"</string>
 </resources>

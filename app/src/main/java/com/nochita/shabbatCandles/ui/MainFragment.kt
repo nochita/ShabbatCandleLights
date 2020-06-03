@@ -1,12 +1,9 @@
 package com.nochita.shabbatCandles.ui
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.nochita.shabbatCandles.R
+import com.nochita.shabbatCandles.extentions.createNotification
 import com.nochita.shabbatCandles.extentions.parseToDayOfTheMonth
 import com.nochita.shabbatCandles.extentions.parseToHoursAndSeconds
 import com.nochita.shabbatCandles.model.ShabbatCandlesData
-import com.nochita.shabbatCandles.receiver.AlarmReceiver
 import com.nochita.shabbatCandles.viewmodel.ShabbatCandleViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
-import java.util.*
 
 
 class MainFragment : Fragment() {
@@ -73,26 +69,10 @@ class MainFragment : Fragment() {
     private fun programmAlarm(data : ShabbatCandlesData) {
         var alarmMgr: AlarmManager? = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val broadcastIntent = Intent(context, AlarmReceiver::class.java)
-        broadcastIntent.putExtra(DATE_EXTRA, data.date)
-        broadcastIntent.putExtra(PARASHAT_EXTRA, data.parashat)
-
-        val alarmIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent,  PendingIntent.FLAG_UPDATE_CURRENT)
-
-        Log.d(TAG, "firing alarm for ${data.getDateInMillis()} milliseconds")
-
-        alarmMgr?.set(
-            AlarmManager.RTC_WAKEUP,
-            data.getDateInMillis()!! - AlarmManager.INTERVAL_HOUR,
-            alarmIntent
-        )
-
-        // TODO delete this. Only to test
-        alarmMgr?.set(
-            AlarmManager.RTC_WAKEUP,
-            Calendar.getInstance().timeInMillis + 3000,
-            alarmIntent
-        )
+        alarmMgr?.let {
+            alarmMgr.createNotification(context!!, data)
+            alarmMgr.createNotification(context!!, data, AlarmManager.INTERVAL_HOUR)
+        }
 
     }
 }

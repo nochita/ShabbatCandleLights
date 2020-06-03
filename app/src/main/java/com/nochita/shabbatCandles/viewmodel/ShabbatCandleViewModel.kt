@@ -10,7 +10,7 @@ import com.nochita.shabbatCandles.model.ShabbatCandlesData
 import com.nochita.shabbatCandles.network.ShabbatCandlesRepository
 import kotlinx.coroutines.Dispatchers
 
-class ShabbatCandleViewModel : ViewModel(){
+class ShabbatCandleViewModel : ViewModel() {
 
     val repository: ShabbatCandlesRepository = ShabbatCandlesRepository()
 
