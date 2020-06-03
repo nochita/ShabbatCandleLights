@@ -4,4 +4,8 @@
     <string name="show_notifications">Mostrar notificaciones</string>
     <string name="friday_at">"Viernes %1s a las "</string>
     <string name="light_candle_notificacion">"Encendido de velas de shabat"</string>
+    <string name="light_candle_channel_description">"Encendido de velas de shabat"</string>
+    <string name="explanation">"Se agregarán 2 notificaciones: una notificacion sonará una hora antes del encendido de velas y otra notificación sonará en el momento exacto del encendido de velas de shabat"</string>
+    <string name="explanation_done">"Se agregaron 2 notificaciones: una notificacion sonará una hora antes del encendido de velas y otra notificación sonará en el momento exacto del encendido de velas de shabat"</string>
+    <string name="parashat_at">"%1s a las %2s"</string>
 </resources>

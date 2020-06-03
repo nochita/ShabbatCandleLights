@@ -34,7 +34,7 @@ class NotificationReceiver : BroadcastReceiver() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channelId = "shabbat_candle_light"
                 val name: CharSequence = context.getString(R.string.light_candle_notificacion)
-                val description = "Channel to shabbat candle lights timming"
+                val description = context.getString(R.string.light_candle_channel_description)
 
                 val importance = NotificationManager.IMPORTANCE_HIGH
                 val mChannel = NotificationChannel(channelId, name, importance)
@@ -53,7 +53,7 @@ class NotificationReceiver : BroadcastReceiver() {
 
             builder.apply {
                 setSmallIcon(R.drawable.ic_candle)
-                setContentTitle("${parashat} at ${dateString.parseToHoursAndSeconds()}")
+                setContentTitle(context.getString(R.string.parashat_at, parashat, dateString.parseToHoursAndSeconds()))
                 setContentText(context.getString(R.string.light_candle_notificacion))
             }
 

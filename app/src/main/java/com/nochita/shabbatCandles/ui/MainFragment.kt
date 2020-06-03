@@ -74,5 +74,6 @@ class MainFragment : Fragment() {
             alarmMgr.createNotification(context!!, data, AlarmManager.INTERVAL_HOUR)
         }
 
+        tvExplanation.text = getString(R.string.explanation_done)
     }
 }
