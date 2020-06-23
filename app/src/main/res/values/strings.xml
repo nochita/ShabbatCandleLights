@@ -8,4 +8,6 @@
     <string name="explanation">"Se agregarán 2 notificaciones: una notificacion sonará una hora antes del encendido de velas y otra notificación sonará en el momento exacto del encendido de velas de shabat"</string>
     <string name="explanation_done">"Se agregaron 2 notificaciones: una notificacion sonará una hora antes del encendido de velas y otra notificación sonará en el momento exacto del encendido de velas de shabat"</string>
     <string name="parashat_at">"%1s a las %2s"</string>
+    <string name="change_location">Modificar ubicación</string>
+    <string name="hint_map">Ingresá un lugar</string>
 </resources>

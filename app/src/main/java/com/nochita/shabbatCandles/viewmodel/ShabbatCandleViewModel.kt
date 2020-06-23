@@ -9,6 +9,7 @@ import com.nochita.shabbatCandles.model.ItemCategory
 import com.nochita.shabbatCandles.model.ShabbatCandlesData
 import com.nochita.shabbatCandles.network.ShabbatCandlesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 
 class ShabbatCandleViewModel : ViewModel() {
 
@@ -16,6 +17,7 @@ class ShabbatCandleViewModel : ViewModel() {
 
     fun getData() : LiveData<ShabbatCandlesData>  = liveData(Dispatchers.IO) {
         val hebCalResponse = repository.getData()
+        delay(2000)
         hebCalResponse?.items.let {
             emit(obtainData(hebCalResponse!!.items))
         }

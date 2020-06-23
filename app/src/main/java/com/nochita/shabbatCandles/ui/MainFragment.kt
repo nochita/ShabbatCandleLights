@@ -2,11 +2,10 @@ package com.nochita.shabbatCandles.ui
 
 import android.app.AlarmManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.text.bold
 import androidx.core.text.scale
 import androidx.core.view.isVisible
@@ -31,6 +30,8 @@ class MainFragment : Fragment() {
 
         public const val DATE_EXTRA = "DATA_EXTRA"
         public const val PARASHAT_EXTRA = "PARASHAT_EXTRA"
+
+        public const val REQUEST_CODE_MAP = 1
     }
 
     lateinit var viewModel : ShabbatCandleViewModel
@@ -41,15 +42,32 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        shimmer_view_container.startShimmer()
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             populateUI(it)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_change_location -> {
+                startActivityForResult(Intent(context, MapsActivity::class.java), REQUEST_CODE_MAP)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun populateUI(data : ShabbatCandlesData?) {
@@ -60,10 +78,12 @@ class MainFragment : Fragment() {
 
             tvTime.text = spannableStringBuilder //data.date
             tvParashat.text = data.parashat.capitalize()
-            setAlarmButton.isVisible = true
 
             setAlarmButton.setOnClickListener{ programmAlarm(data) }
+
         }
+
+        shimmer_view_container.hideShimmer()
     }
 
     private fun programmAlarm(data : ShabbatCandlesData) {
