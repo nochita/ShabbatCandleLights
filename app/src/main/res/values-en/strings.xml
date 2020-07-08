@@ -8,6 +8,4 @@
     <string name="explanation">"Two notifications will be added: one notification will appear one hour before and the other will show up at the exact time to light the candle"</string>
     <string name="explanation_done">"Two notifications were added: one notification will appear one hour before and the other will show up at the exact time to light the candle"</string>
     <string name="parashat_at">"%1s at %2s"</string>
-    <string name="change_location">Change location</string>
-    <string name="hint_map">Enter a location</string>
 </resources>

@@ -42,7 +42,6 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -53,21 +52,6 @@ class MainFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             populateUI(it)
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_change_location -> {
-                startActivityForResult(Intent(context, MapsActivity::class.java), REQUEST_CODE_MAP)
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun populateUI(data : ShabbatCandlesData?) {

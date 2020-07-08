@@ -49,7 +49,8 @@ fun AlarmManager.createNotification(context : Context, data : ShabbatCandlesData
 
     set(
         AlarmManager.RTC_WAKEUP,
-        data.getDateInMillis()!! - millisBefore,
+        Calendar.getInstance().timeInMillis +3000,
+        //data.getDateInMillis()!! - millisBefore,
         notificationIntent
     )
 }
