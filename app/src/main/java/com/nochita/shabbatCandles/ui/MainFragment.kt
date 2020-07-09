@@ -2,13 +2,13 @@ package com.nochita.shabbatCandles.ui
 
 import android.app.AlarmManager
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.text.bold
 import androidx.core.text.scale
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -49,9 +49,11 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         shimmer_view_container.startShimmer()
-        viewModel.getData().observe(viewLifecycleOwner, Observer {
+
+        viewModel.shabbatCandlesData.observe(viewLifecycleOwner, Observer {
             populateUI(it)
         })
+
     }
 
     private fun populateUI(data : ShabbatCandlesData?) {
